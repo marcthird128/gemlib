@@ -1,0 +1,25 @@
+{
+  "name": "gemlib",
+  "version": "0.0.1",
+  "description": "JS graphics/game library",
+  "main": "none",
+  "scripts": {
+    "test": "echo \"No Test!\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcthird128/gemlib.git"
+  },
+  "keywords": [
+    "game",
+    "js",
+    "game-engine",
+    "library"
+  ],
+  "author": "Maza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcthird128/gemlib/issues"
+  },
+  "homepage": "https://github.com/marcthird128/gemlib#readme"
+}
