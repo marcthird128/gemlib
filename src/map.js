@@ -88,6 +88,13 @@ class StaticMap extends BaseMap {
     calculate() {
         this._output = this.input;
     }
+
+    // override get output to never call
+    // claculate and 
+    // just return this.input
+    get output() {
+        return this.input;
+    }
 }
 
 // export
