@@ -5,4 +5,5 @@
 // export all modules
 module.exports = {
     ...require('./map.js'),
+    ...require('./vec2.js'),
 }
