@@ -30,6 +30,11 @@ class Vec2 extends StaticMap {
         }
     }
 
+    // static methods
+    static fromAngle(angle) {
+        return new Vec2(Math.cos(angle), Math.sin(angle));
+    }
+
     // xy setters & getters
     get x() {
         return this.input[0];
