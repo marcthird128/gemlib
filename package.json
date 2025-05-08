@@ -1,7 +1,7 @@
 {
   "name": "gemlib",
   "version": "0.0.1",
-  "description": "JS graphics/game library",
+  "description": "JS reactive game/math/graphics library",
   "main": "none",
   "scripts": {
     "test": "echo \"No Test!\""
@@ -11,9 +11,9 @@
     "url": "git+https://github.com/marcthird128/gemlib.git"
   },
   "keywords": [
+    "math",
+    "graphics",
     "game",
-    "js",
-    "game-engine",
     "library"
   ],
   "author": "Maza",
