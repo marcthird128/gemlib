@@ -14,14 +14,18 @@ class Vec2 extends StaticMap {
             super([0, 0]);
         } else if(a instanceof Vec2) {
             // if a Vec2 was passed, copy
-            super(a.output.slice());
+            super(a.get());
         } else if (Array.isArray(a)) {
-            // if an array was passed, copy
-            super(a.slice());
+            // if an array was passed, parse it
+            let x = parseFloat(a[0]) || 0;
+            let y = parseFloat(a[1]) || 0;
+            
+            super([x, y]);
         } else {
             // try to parse as numbers
             let x = parseFloat(a) || 0;
             let y = parseFloat(b) || 0;
+
             super([x, y]);
         }
     }
@@ -34,24 +38,18 @@ class Vec2 extends StaticMap {
         return this.input[1];
     }
     set x(val) {
-        this.input[0] = val;
-
-        // mark dirty so it updates
+        this.input[0] = parseFloat(val) || 0;
         this.markDirty();
     }
     set y(val) {
-        this.input[1] = val;
-
-        // mark dirty so it updates
+        this.input[1] = parseFloat(val) || 0;
         this.markDirty();
     }
 
-    // dupicate
+    // math and misc
     copy() {
-        return new Vec2(this.input);
+        return new Vec2(this);
     }
-
-    // math and misc methods
     length() {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     }
@@ -64,16 +62,16 @@ class Vec2 extends StaticMap {
         this.markDirty();
     }
     clamp(min, max) {
-        this.input[0] = Math.min(Math.max(this.input[0], min), max);
-        this.input[1] = Math.min(Math.max(this.input[1], min), max);
+        this.input[0] = Math.min(Math.max(this.x, min), max);
+        this.input[1] = Math.min(Math.max(this.y, min), max);
 
         // mark dirty
         this.markDirty();
     }
     add(v) {
         if (v instanceof Vec2) {
-            this.input[0] += v.output[0];
-            this.input[1] += v.output[1];
+            this.input[0] += v.x;
+            this.input[1] += v.y;
         } else {
             v = parseFloat(v) || 0;
             this.input[0] += v;
@@ -85,8 +83,8 @@ class Vec2 extends StaticMap {
     }
     sub(v) {
         if (v instanceof Vec2) {
-            this.input[0] -= v.output[0];
-            this.input[1] -= v.output[1];
+            this.input[0] -= v.x;
+            this.input[1] -= v.y;
         } else {
             v = parseFloat(v) || 0;
             this.input[0] -= v;
@@ -98,8 +96,8 @@ class Vec2 extends StaticMap {
     }
     mul(v) {
         if (v instanceof Vec2) {
-            this.input[0] *= v.output[0];
-            this.input[1] *= v.output[1];
+            this.input[0] *= v.x;
+            this.input[1] *= v.y;
         } else {
             v = parseFloat(v) || 0;
             this.input[0] *= v;
@@ -111,8 +109,8 @@ class Vec2 extends StaticMap {
     }
     div(v) {
         if (v instanceof Vec2) {
-            this.input[0] /= v.output[0];
-            this.input[1] /= v.output[1];
+            this.input[0] /= v.x;
+            this.input[1] /= v.y;
         } else {
             v = parseFloat(v) || 0;
             this.input[0] /= v;
@@ -124,14 +122,14 @@ class Vec2 extends StaticMap {
     }
     dot(v) {
         if (v instanceof Vec2) {
-            return this.input[0] * v.output[0] + this.input[1] * v.output[1];
+            return this.x * v.x + this.y * v.y;
         } else {
             v = parseFloat(v) || 0;
-            return this.input[0] * v + this.input[1] * v;
+            return this.x * v + this.y * v;
         }
     }
     angle() {
-        return Math.atan2(this.input[1], this.input[0]);
+        return Math.atan2(this.x, this.y);
     }
     map(fn) {
         // if its not a function return
@@ -141,15 +139,15 @@ class Vec2 extends StaticMap {
         }
 
         // map
-        this.input[0] = fn(this.input[0]);
-        this.input[1] = fn(this.input[1]);
+        this.input[0] = fn(this.x);
+        this.input[1] = fn(this.y);
 
         // mark dirty
         this.markDirty();
     }
     set(x, y) {
-        this.input[0] = x;
-        this.input[1] = y;
+        this.input[0] = parseFloat(x) || 0;
+        this.input[1] = parseFloat(y) || 0;
 
         // mark dirty
         this.markDirty();
@@ -159,14 +157,14 @@ class Vec2 extends StaticMap {
     }
     equals(v, epsilon = 0.00001) {
         if (v instanceof Vec2) {
-            return Math.abs(this.input[0] - v.output[0]) < epsilon && Math.abs(this.input[1] - v.output[1]) < epsilon;
+            return Math.abs(this.x - v.x) < epsilon && Math.abs(this.y - v.y) < epsilon;
         } else {
             v = parseFloat(v) || 0;
-            return Math.abs(this.input[0] - v) < epsilon && Math.abs(this.input[1] - v) < epsilon;
+            return Math.abs(this.x - v) < epsilon && Math.abs(this.y - v) < epsilon;
         }
     }
     toString() {
-        return `(${this.input[0]}, ${this.input[1]})`;
+        return `(${this.x}, ${this.y})`;
     }
     toJSON() {
         return this.input;

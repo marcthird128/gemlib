@@ -6,4 +6,5 @@
 module.exports = {
     ...require('./map.js'),
     ...require('./vec2.js'),
+    ...require('./vec3.js'),    
 }
