@@ -134,7 +134,7 @@ class Vec2 extends StaticMap {
         }
     }
     angle() {
-        return Math.atan2(this.x, this.y);
+        return Math.atan2(this.y, this.x);
     }
     map(fn) {
         // if its not a function return
