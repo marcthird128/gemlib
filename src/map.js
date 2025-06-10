@@ -86,7 +86,10 @@ class BaseMap {
 // static map (output is input)
 class StaticMap extends BaseMap {
     calculate() {
-        this._output = this.input;
+        // do nothing
+        // this method is here just in case
+        // calculate() is somehow called
+        // (although it shouldn't be)
     }
 
     // override get output to never call
